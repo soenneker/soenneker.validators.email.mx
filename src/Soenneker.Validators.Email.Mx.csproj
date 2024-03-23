@@ -45,6 +45,6 @@
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
         <PackageReference Include="Soenneker.DnsClient.Util" Version="2.1.3" />
         <PackageReference Include="Soenneker.Utils.String" Version="2.1.631" />
-        <PackageReference Include="Soenneker.Validators.Validator" Version="2.1.178" />
+        <PackageReference Include="Soenneker.Validators.Validator" Version="2.1.179" />
     </ItemGroup>
 </Project>
