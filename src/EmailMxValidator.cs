@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using DnsClient;
 using Microsoft.Extensions.Logging;
@@ -22,11 +23,11 @@ public class EmailMxValidator : Validator.Validator, IEmailMxValidator
         _dnsClientUtil = dnsClientUtil;
     }
 
-    public async ValueTask<bool> Validate(string domain)
+    public async ValueTask<bool> Validate(string domain, CancellationToken cancellationToken = default)
     {
-        LookupClient client = await _dnsClientUtil.Get().NoSync();
+        LookupClient client = await _dnsClientUtil.Get(cancellationToken: cancellationToken).NoSync();
 
-        IDnsQueryResponse? result = await client.QueryAsync(domain, QueryType.MX).NoSync();
+        IDnsQueryResponse? result = await client.QueryAsync(domain, QueryType.MX, cancellationToken: cancellationToken).NoSync();
 
         if (result.HasError)
             return false;
@@ -37,13 +38,13 @@ public class EmailMxValidator : Validator.Validator, IEmailMxValidator
         return false;
     }
 
-    public ValueTask<bool> ValidateEmail(string email)
+    public ValueTask<bool> ValidateEmail(string email, CancellationToken cancellationToken = default)
     {
         string? domain = _stringUtil.GetDomainFromEmail(email);
 
         if (domain == null)
             return ValueTask.FromResult(false);
 
-        return Validate(domain);
+        return Validate(domain, cancellationToken);
     }
 }

@@ -1,4 +1,5 @@
 using Soenneker.Validators.Validator.Abstract;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Soenneker.Validators.Email.Mx.Abstract;
@@ -12,8 +13,9 @@ public interface IEmailMxValidator : IValidator
     /// Returns true if there is a domain, and it has MX records, and returns with no errors
     /// </summary>
     /// <param name="domain"></param>
+    /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    ValueTask<bool> Validate(string domain);
+    ValueTask<bool> Validate(string domain, CancellationToken cancellationToken = default);
 
-    ValueTask<bool> ValidateEmail(string email);
+    ValueTask<bool> ValidateEmail(string email, CancellationToken cancellationToken = default);
 }
