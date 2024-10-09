@@ -42,7 +42,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Soenneker.DnsClient.Util" Version="2.1.490" />
+        <PackageReference Include="Soenneker.DnsClient.Util" Version="2.1.491" />
         <PackageReference Include="Soenneker.Extensions.Task" Version="2.1.65" />
         <PackageReference Include="Soenneker.Utils.String" Version="2.1.1420" />
         <PackageReference Include="Soenneker.Validators.Validator" Version="2.1.344" />
