@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Soenneker.Validators.Email.Mx.Abstract;
 using Soenneker.Tests.FixturedUnit;
 using Xunit;
-using Xunit.Abstractions;
+
 using FluentAssertions;
 
 namespace Soenneker.Validators.Email.Mx.Tests;
