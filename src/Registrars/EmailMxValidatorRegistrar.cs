@@ -1,3 +1,4 @@
+﻿
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Soenneker.DnsClient.Util.Registrars;
@@ -14,20 +15,22 @@ public static class EmailMxValidatorRegistrar
     /// <summary>
     /// Adds <see cref="IEmailMxValidator"/> as a singleton service. <para/>
     /// </summary>
-    public static void AddEmailMxValidatorAsSingleton(this IServiceCollection services)
+    public static IServiceCollection AddEmailMxValidatorAsSingleton(this IServiceCollection services)
     {
         services.AddStringUtilAsScoped();
         services.AddDnsClientUtilAsSingleton();
         services.TryAddSingleton<IEmailMxValidator, EmailMxValidator>();
+        return services;
     }
 
     /// <summary>
     /// Adds <see cref="IEmailMxValidator"/> as a scoped service. <para/>
     /// </summary>
-    public static void AddEmailMxValidatorAsScoped(this IServiceCollection services)
+    public static IServiceCollection AddEmailMxValidatorAsScoped(this IServiceCollection services)
     {
         services.AddStringUtilAsScoped();
         services.AddDnsClientUtilAsSingleton();
         services.TryAddScoped<IEmailMxValidator, EmailMxValidator>();
+        return services;
     }
 }
