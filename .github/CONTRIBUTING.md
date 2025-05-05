@@ -1,4 +1,4 @@
-# Contributing to Soenneker.Validators.Email.Mx
+﻿# Contributing to Soenneker.Validators.Email.Mx
 
 We're excited that you're interested in contributing!
 
