@@ -4,7 +4,7 @@ using Soenneker.Validators.Email.Mx.Abstract;
 using Soenneker.Tests.FixturedUnit;
 using Xunit;
 
-using FluentAssertions;
+using AwesomeAssertions;
 
 namespace Soenneker.Validators.Email.Mx.Tests;
 
