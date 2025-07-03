@@ -12,7 +12,7 @@ using Soenneker.Validators.Email.Mx.Abstract;
 namespace Soenneker.Validators.Email.Mx;
 
 /// <inheritdoc cref="IEmailMxValidator"/>
-public class EmailMxValidator : Validator.Validator, IEmailMxValidator
+public sealed class EmailMxValidator : Validator.Validator, IEmailMxValidator
 {
     private readonly IStringUtil _stringUtil;
     private readonly IDnsClientUtil _dnsClientUtil;
