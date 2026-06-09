@@ -46,6 +46,6 @@
     <ItemGroup>
         <PackageReference Include="Soenneker.DnsClient.Util" Version="4.0.1216" />
         <PackageReference Include="Soenneker.Utils.String" Version="4.0.3017" />
-        <PackageReference Include="Soenneker.Validators.Validator" Version="4.0.728" />
+        <PackageReference Include="Soenneker.Validators.Validator" Version="4.0.729" />
     </ItemGroup>
 </Project>
