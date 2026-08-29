@@ -18,10 +18,10 @@ public interface IEmailMxValidator : IValidator
     ValueTask<bool> Validate(string domain, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Executes the validate email operation.
+    /// Validates email for the Email Mx Validator.
     /// </summary>
-    /// <param name="email">The email address.</param>
-    /// <param name="cancellationToken">The cancellation token.</param>
-    /// <returns>A task containing the result of the operation.</returns>
+    /// <param name="email">Email address to validate or query.</param>
+    /// <param name="cancellationToken">Token used to cancel the operation.</param>
+    /// <returns>true if validates email for the Email Mx Validator; otherwise, false.</returns>
     ValueTask<bool> ValidateEmail(string email, CancellationToken cancellationToken = default);
 }

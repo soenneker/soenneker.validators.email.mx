@@ -15,6 +15,8 @@ public static class EmailMxValidatorRegistrar
     /// <summary>
     /// Adds <see cref="IEmailMxValidator"/> as a singleton service. <para/>
     /// </summary>
+    /// <param name="services">Service collection that receives the registration.</param>
+    /// <returns>The same service collection, so additional registrations can be chained.</returns>
     public static IServiceCollection AddEmailMxValidatorAsSingleton(this IServiceCollection services)
     {
         services.AddStringUtilAsScoped();
@@ -26,6 +28,8 @@ public static class EmailMxValidatorRegistrar
     /// <summary>
     /// Adds <see cref="IEmailMxValidator"/> as a scoped service. <para/>
     /// </summary>
+    /// <param name="services">Service collection that receives the registration.</param>
+    /// <returns>The same service collection, so additional registrations can be chained.</returns>
     public static IServiceCollection AddEmailMxValidatorAsScoped(this IServiceCollection services)
     {
         services.AddStringUtilAsScoped();
