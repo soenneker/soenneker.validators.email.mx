@@ -10,11 +10,11 @@ namespace Soenneker.Validators.Email.Mx.Abstract;
 public interface IEmailMxValidator : IValidator
 {
     /// <summary>
-    /// Returns true if there is a domain, and it has MX records, and returns with no errors
+    /// Checks whether a domain is syntactically valid and publishes at least one MX record.
     /// </summary>
-    /// <param name="domain"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
+    /// <param name="domain">Domain name to validate and query.</param>
+    /// <param name="cancellationToken">Token used to cancel the DNS lookup.</param>
+    /// <returns>A task whose result is <see langword="true"/> when MX records are present and no validation error occurs; otherwise, <see langword="false"/>.</returns>
     ValueTask<bool> Validate(string domain, CancellationToken cancellationToken = default);
 
     /// <summary>
