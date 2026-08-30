@@ -5,7 +5,7 @@
 
 # Soenneker.Validators.Email.Mx
 
-A validation module checking for the existence of domain MX records.
+Queries DNS for MX records on a domain or on the domain extracted from an email-shaped string.
 
 ## Install
 
@@ -13,31 +13,41 @@ A validation module checking for the existence of domain MX records.
 dotnet add package Soenneker.Validators.Email.Mx
 ```
 
-## Quick start
+## Registration
 
 ```csharp
 using Soenneker.Validators.Email.Mx.Registrars;
 using Microsoft.Extensions.DependencyInjection;
 
-var services = new ServiceCollection();
-var result = services.AddEmailMxValidatorAsSingleton();
+services.AddEmailMxValidatorAsSingleton();
 ```
 
-Adds `IEmailMxValidator` as a singleton service.
+`AddEmailMxValidatorAsScoped()` is also available. The scoped validator still reuses the singleton DNS client utility; disposing the scope does not discard that shared DNS client state. The singleton registration uses singleton dependencies throughout.
 
-## What you get
+## Query a domain
 
-- `IEmailMxValidator` — A validation module checking for the existence of domain MX records.
-- `EmailMxValidatorRegistrar` — Registers the validator that checks whether an email domain publishes MX records.
+```csharp
+using Soenneker.Validators.Email.Mx.Abstract;
 
-## API at a glance
+bool hasMx = await validator.Validate(
+    "example.com",
+    cancellationToken);
+```
 
-| API | What it does | Result / important behavior |
-| --- | --- | --- |
-| `IEmailMxValidator.Validate(domain, cancellationToken)` | Checks whether a domain is syntactically valid and publishes at least one MX record. | A task whose result is `true` when MX records are present and no validation error occurs; otherwise, `false`. |
-| `EmailMxValidatorRegistrar.AddEmailMxValidatorAsSingleton(services)` | Adds `IEmailMxValidator` as a singleton service. | The same service collection, so additional registrations can be chained. |
-| `EmailMxValidatorRegistrar.AddEmailMxValidatorAsScoped(services)` | Adds `IEmailMxValidator` as a scoped service. | The same service collection, so additional registrations can be chained. |
+The result is `true` when the DNS response contains at least one MX answer and `false` when the response reports an error or contains no MX answers. The method does not validate or normalize domain syntax before querying.
 
-## Practical notes
+## Query an email domain
 
-- Cancellation stops pending work; it does not undo work that has already completed.
+```csharp
+bool hasMx = await validator.ValidateEmail(
+    "person@example.com",
+    cancellationToken);
+```
+
+`ValidateEmail` extracts the text after the last `@`. It returns `false` when non-empty text cannot be extracted on both sides, then delegates to the domain query. This is not mailbox syntax validation and does not trim input or normalize internationalized domain names.
+
+## What an MX result means
+
+A `true` result proves only that the resolver returned an MX record. It does not prove that a mailbox exists, accepts mail, or belongs to a user. The validator does not connect to an SMTP server and does not apply the implicit-A/AAAA fallback used by mail delivery when MX records are absent.
+
+DNS response errors are returned as `false`. Transport failures and cancellation from the DNS client propagate to the caller. DNS answers can change and may be cached by the underlying resolver, so do not persist this result as permanent deliverability state.

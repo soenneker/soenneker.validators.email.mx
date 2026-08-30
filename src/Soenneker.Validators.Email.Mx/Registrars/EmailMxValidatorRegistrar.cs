@@ -19,7 +19,7 @@ public static class EmailMxValidatorRegistrar
     /// <returns>The same service collection, so additional registrations can be chained.</returns>
     public static IServiceCollection AddEmailMxValidatorAsSingleton(this IServiceCollection services)
     {
-        services.AddStringUtilAsScoped();
+        services.AddStringUtilAsSingleton();
         services.AddDnsClientUtilAsSingleton();
         services.TryAddSingleton<IEmailMxValidator, EmailMxValidator>();
         return services;

@@ -11,7 +11,6 @@ using Soenneker.Validators.Email.Mx.Abstract;
 
 namespace Soenneker.Validators.Email.Mx;
 
-/// <inheritdoc cref="IEmailMxValidator"/>
 public sealed class EmailMxValidator : Validator.Validator, IEmailMxValidator
 {
     private readonly IStringUtil _stringUtil;
