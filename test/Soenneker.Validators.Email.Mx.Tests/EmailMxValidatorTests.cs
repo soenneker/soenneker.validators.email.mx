@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Soenneker.Validators.Email.Mx.Abstract;
@@ -18,16 +19,16 @@ public class EmailMxValidatorTests : HostedUnitTest
     }
 
     [Test]
-    public async Task Validate_should_be_true()
+    public async Task Validate_should_be_true(CancellationToken cancellationToken)
     {
-        bool result = await _validator.Validate("google.com");
+        bool result = await _validator.Validate("google.com", cancellationToken: cancellationToken);
         result.Should().BeTrue();
     }
 
     [Test]
-    public async Task Validate_should_be_false()
+    public async Task Validate_should_be_false(CancellationToken cancellationToken)
     {
-        bool result = await _validator.Validate(Faker.Random.AlphaNumeric(50) + ".com");
+        bool result = await _validator.Validate(Faker.Random.AlphaNumeric(50) + ".com", cancellationToken: cancellationToken);
         result.Should().BeFalse();
     }
 }
