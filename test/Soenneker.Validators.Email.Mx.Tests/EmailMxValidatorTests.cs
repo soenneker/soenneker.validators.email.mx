@@ -19,14 +19,14 @@ public class EmailMxValidatorTests : HostedUnitTest
     }
 
     [Test]
-    public async Task Validate_should_be_true(CancellationToken cancellationToken)
+    public async ValueTask Validate_should_be_true(CancellationToken cancellationToken)
     {
         bool result = await _validator.Validate("google.com", cancellationToken: cancellationToken);
         result.Should().BeTrue();
     }
 
     [Test]
-    public async Task Validate_should_be_false(CancellationToken cancellationToken)
+    public async ValueTask Validate_should_be_false(CancellationToken cancellationToken)
     {
         bool result = await _validator.Validate(Faker.Random.AlphaNumeric(50) + ".com", cancellationToken: cancellationToken);
         result.Should().BeFalse();
